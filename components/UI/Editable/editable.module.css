@@ -1,0 +1,117 @@
+.btn {
+    float: right;
+    background-color: #458888;
+    color: white;
+    font-weight: bold;
+    padding: 6px 14px;
+    border-radius: 5px;
+    border: 1px solid #458888;
+    margin-bottom: 2rem;
+}
+
+.emoji_picker_container {
+    position: sticky;
+    top: 0;
+    display: flex;
+    background-color: #FFF;
+    width: 100%;
+    min-height: 60px;
+}
+
+:global(.dark) .emoji_picker_container {
+    background-color: rgb(10, 10, 10);
+}
+
+.emoji_picker_container ul {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    flex-wrap: wrap;
+    list-style-type: none;
+}
+
+.emoji_picker_container button {
+    background-color: transparent;
+    border: none;
+}
+
+.emoji_picker_container li {
+    margin: 5px;
+    font-size: 1.5rem;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+:global(.dark) .emoji_picker_container li {
+    border: 1px solid #111;
+}
+
+.emoji_picker_container ul.editor_palatte {
+    width: max-content;
+}
+
+.emoji_picker_container ul.editor_palatte button {
+    background-color: #458888;
+    margin: 0 5px;
+    background-color: transparent;
+    color: black;
+}
+
+:global(.dark) .emoji_picker_container p,
+:global(.dark) .emoji_picker_container ul.editor_palatte button {
+    color: white;
+}
+
+.editable {
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: 90vh;
+    padding: 1.6rem;
+    font-size: 1.3rem;
+    clear: both;
+}
+
+.editable section {
+    display: block;
+    width: 100%;
+    content: " ";
+    min-height: 100px;
+    border:1px solid #999;
+    border-radius: 5px;
+    margin: 20px 0;
+    padding: 20px;
+}
+.editable p ,
+.editable span {
+    content: " ";
+    min-width: 20px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #eee;
+    color: #888;
+    -webkit-filter: unset;
+    filter: unset;
+}
+.editable span:global(.green) {
+    background-color: #78b159;
+    color: white;
+}
+.editable span:global(.orange) {
+    background-color: #f4900c;
+    color: white;
+}
+.editable span:global(.red) {
+    background-color: #dd2e44;
+    color: white;
+}
+.editable span:global(.blue) {
+    background-color: #55acee;
+    color: white;
+}
+.editable:focus {
+    text-decoration: none;
+    outline: none;
+    caret-color: #458888;
+}

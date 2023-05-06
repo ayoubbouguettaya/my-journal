@@ -1,0 +1,24 @@
+.mydaily_journal_container {}
+
+.btn {
+  float: right;
+  background-color: #458888;
+  color: white;
+  font-weight: bold;
+  padding: 6px 14px;
+  border-radius: 5px;
+  border: 1px solid #458888;
+  margin-bottom: 2rem;
+}
+
+.editable {
+  padding: 2rem;
+  font-size: 1.5rem;
+  clear: both;
+}
+
+.editable:focus {
+  text-decoration: none;
+  outline: none;
+  caret-color: #458888;
+}

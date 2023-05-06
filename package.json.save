@@ -1,16 +1,11 @@
 {
   "name": "my-journal",
   "version": "0.1.0",
+"homepage": "./",
+
   "private": true,
- "build": {
-   "appId": "ayoubbouguettaya.github.com/my-journal",
-   "files": [ "build/**/*", "node_modules/**/*" ],
-   "directories":{
- "buildResources": "assets"
-   }
- },
   "scripts": {
-    "dev": "next dev -p 3000",
+    "dev": "next dev -p 5005",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -19,6 +14,7 @@
 "electron-dev": "concurrently \"BROWSER=none npm start\" \"wait-on http://localhost:3000 && electron .\"",
  "electron-package": "./node_modules/.bin/electron-builder -c.extraMetadata.main=build/start-electron.js",
  "preelectron-package": "npm run build"
+
   },
   "dependencies": {
     "next": "12.3.0",
