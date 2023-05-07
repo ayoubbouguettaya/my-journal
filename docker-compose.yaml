@@ -1,0 +1,14 @@
+version: '3'
+services:
+  myjournal:
+    build: ./
+    ports:
+      - 3000:3000
+  nginx-myjournal:
+    build: ./nginx
+    ports:
+      - 80:80
+      - 433:433
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+    
