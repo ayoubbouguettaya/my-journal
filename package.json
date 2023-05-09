@@ -10,9 +10,9 @@
    }
  },
   "scripts": {
-    "dev": "next dev -p 3000",
+    "dev": "next dev -p 3009",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 3009",
     "lint": "next lint",
     "export": "next export",
     "deploy": "next build && next export && sudo cp -r out/* /var/www/html/",
