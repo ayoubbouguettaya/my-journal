@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 
 import styles from './editable.module.css';
+import { useKey } from '../../hook/useKey';
 
 type Props = {
-
+    showSavedMessage: boolean,
     handleOnChange: (event: any) => void
     md: string,
     editableRef: React.MutableRefObject<HTMLDivElement | null>,
@@ -11,7 +12,7 @@ type Props = {
     disabled?: boolean,
 }
 
-const EditableContent = ({ handleOnChange, md, handleSave, editableRef, disabled = false }: Props) => {
+const EditableContent = ({ handleOnChange, md, handleSave, editableRef, showSavedMessage,disabled = false }: Props) => {
     const [showEmoji, setShowEmoji] = useState(false);
     const [count, setCount] = useState(0);
 
@@ -19,7 +20,6 @@ const EditableContent = ({ handleOnChange, md, handleSave, editableRef, disabled
 
     const handleWrappSelection = (tag: any, className = "", color = "", background = "") => {
         try {
-            console.log("handle wraper *************called** ")
             const wrapperElement: HTMLElement = document.createElement(tag)
 
             wrapperElement.className = className;
@@ -36,7 +36,6 @@ const EditableContent = ({ handleOnChange, md, handleSave, editableRef, disabled
                 (parentElementTagName === 'I' && tag === 'B') ||
                 parentOfparentElementTagName !== tag) {
 
-                console.log(selection?.rangeCount)
                 if (selection?.rangeCount) {
                     var range = selection?.getRangeAt(0).cloneRange();
                     range.surroundContents(wrapperElement);
@@ -53,10 +52,10 @@ const EditableContent = ({ handleOnChange, md, handleSave, editableRef, disabled
         }
     }
 
-
     const toggleEmoji = () => {
         setShowEmoji((prevS) => !prevS)
     }
+
     const handleCopy = (value: string) => {
         navigator.clipboard.writeText(value);
         toggleEmoji()
@@ -93,7 +92,8 @@ const EditableContent = ({ handleOnChange, md, handleSave, editableRef, disabled
             />
 
 
-            <button className={styles.btn} onClick={handleSave}>Save</button>
+            <button className={styles.btn} disabled={showSavedMessage} onClick={handleSave}>{showSavedMessage ? "saving ...": "save" }</button>
+
             <div
                 ref={editableRef}
                 className={styles.editable}

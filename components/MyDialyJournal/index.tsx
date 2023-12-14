@@ -1,49 +1,46 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
-import useJournals from '../hook/useJournals'
-import EditableContent from '../UI/Editable'
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import useJournals from "../hook/useJournals";
+import EditableContent from "../UI/Editable";
 
-import styles from './my-daily-journal.module.css'
+import styles from "./my-daily-journal.module.css";
 
-type Props = {}
+type Props = {};
 
 const MyDailyJournal = (props: Props) => {
-  const { todaysJournal, updateTodaysJournal } = useJournals()
-  const [md, setMd] = useState(todaysJournal?.md || "write today's Journal")
-  const editableRef = useRef<HTMLDivElement | null>(null)
+  const { todaysJournal, updateTodaysJournal } = useJournals();
+  const [md, setMd] = useState(todaysJournal?.md || "write today's Journal");
+  const editableRef = useRef<HTMLDivElement | null>(null);
 
   const handleOnChange = (event: any) => {
     event.persist();
-    setMd(editableRef.current?.innerHTML || '');
-  }
+    setMd(editableRef.current?.innerHTML || "");
+  };
 
   const handleSave = useCallback(() => {
-    updateTodaysJournal(md)
-  }, [md])
+    updateTodaysJournal(md);
+  }, [md]);
 
   useEffect(() => {
-
     if (todaysJournal?.md) {
       let html = todaysJournal?.md + " ";
-      html = html.replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+      html = html.replace(/&lt;/g, "<").replace(/&gt;/g, ">");
 
-      console.log(html)
-      setMd(html || "")
+      console.log(html);
+      setMd(html || "");
     }
-  }, [todaysJournal])
-
-
+  }, [todaysJournal]);
 
   return (
     <div className={styles.mydaily_journal_container}>
       <EditableContent
+        showSavedMessage={false}
         editableRef={editableRef}
         handleOnChange={handleOnChange}
         handleSave={handleSave}
         md={md}
       />
     </div>
-  )
-}
+  );
+};
 
-export default MyDailyJournal
-
+export default MyDailyJournal;

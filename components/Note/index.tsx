@@ -4,6 +4,7 @@ import usenotes from '../hook/useNotes'
 
 import styles from './note.module.css'
 import EditableContent from '../UI/Editable'
+import { useKey } from '../hook/useKey'
 
 type Props = {
   id: string,
@@ -14,6 +15,7 @@ type Props = {
 const NoteComponent = (props: Props) => {
   const { getNoteById, updateNoteById } = usenotes()
   const [md, setMd] = useState("")
+  const [showSavedMessage,setShowSavedMessage]= useState(false)
 
   const editableRef = useRef<HTMLDivElement | null>(null)
 
@@ -22,17 +24,29 @@ const NoteComponent = (props: Props) => {
     setMd(editableRef.current?.innerHTML || '');
   }
 
-  const handleSave = useCallback(() => {
-    updateNoteById({ id: props.id, md })
-  }, [md,props.id])
+  const handleSave = useCallback((captuedMd?: string) => {
+    if(captuedMd && typeof captuedMd !== "string"){
+      return;
+    }
+
+    updateNoteById({ id: props.id, md: captuedMd ?? md })
+    setShowSavedMessage(true)
+
+    setTimeout(()=> {
+      setShowSavedMessage(false)
+    },1500)
+  }, [md.length,props.id])
 
   useEffect(() => {
     setMd(getNoteById(props.id)?.md || "")
   }, [props.id])
 
+  useKey("ctrls", handleSave,editableRef)
+
   return (
     <div className={styles.note_container}>
       <EditableContent
+       showSavedMessage={showSavedMessage} 
         editableRef={editableRef}
         handleOnChange={handleOnChange}
         handleSave={handleSave}
